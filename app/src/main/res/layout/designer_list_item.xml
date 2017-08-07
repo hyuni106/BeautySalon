@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="5dp">
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_margin="10dp"
+            android:src="@drawable/salon_logo" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="2dp">
+
+            <TextView
+                android:id="@+id/designerNameTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="디자이너 이름"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="16sp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingTop="3dp">
+
+                <TextView
+                    android:id="@+id/majorTxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="주력"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="3dp"
+                    android:text="/"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/genderTxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="3dp"
+                    android:text="성별"
+                    android:textSize="12sp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="5dp"
+            android:orientation="horizontal"
+            android:padding="5dp">
+
+            <ImageView
+                android:id="@+id/star1"
+                android:layout_width="25dp"
+                android:layout_height="30dp"
+                android:src="@drawable/star"
+                android:visibility="invisible"/>
+
+            <ImageView
+                android:id="@+id/star2"
+                android:layout_width="25dp"
+                android:layout_height="30dp"
+                android:src="@drawable/star"
+                android:visibility="invisible"/>
+
+
+            <ImageView
+                android:id="@+id/star3"
+                android:layout_width="25dp"
+                android:layout_height="30dp"
+                android:src="@drawable/star"
+                android:visibility="invisible"/>
+
+
+            <ImageView
+                android:id="@+id/star4"
+                android:layout_width="25dp"
+                android:layout_height="30dp"
+                android:src="@drawable/star"
+                android:visibility="invisible"/>
+
+
+            <ImageView
+                android:id="@+id/star5"
+                android:layout_width="25dp"
+                android:layout_height="30dp"
+                android:src="@drawable/star"
+                android:visibility="invisible"/>
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>
