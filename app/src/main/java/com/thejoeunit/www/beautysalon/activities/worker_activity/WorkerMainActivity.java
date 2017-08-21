@@ -1,16 +1,13 @@
-package com.thejoeunit.www.beautysalon.activities;
+package com.thejoeunit.www.beautysalon.activities.worker_activity;
 
 import android.os.Bundle;
-import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewPager;
-import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import com.thejoeunit.www.beautysalon.R;
+import com.thejoeunit.www.beautysalon.activities.BaseActivity;
 import com.thejoeunit.www.beautysalon.datas.DesignCase;
-import com.thejoeunit.www.beautysalon.utils.GeneralUtil;
+import com.thejoeunit.www.beautysalon.utils.GlobalData;
 
 public class WorkerMainActivity extends BaseActivity {
 
@@ -35,7 +32,7 @@ public class WorkerMainActivity extends BaseActivity {
     @Override
     public void setValues() {
         super.setValues();
-        reservationAdapter = new ArrayAdapter<DesignCase>(mContext, android.R.layout.simple_list_item_1, GeneralUtil.globalDesignCase);
+        reservationAdapter = new ArrayAdapter<DesignCase>(mContext, android.R.layout.simple_list_item_1, GlobalData.globalDesignCase);
         reservationListView.setAdapter(reservationAdapter);
     }
 

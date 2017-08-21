@@ -2,6 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.thejoeunit.www.beautysalon">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -17,16 +21,15 @@
             </intent-filter>
         </activity>
         <activity android:name=".activities.LoginActivity" />
-        <activity android:name=".activities.SelectLoginMode" />
-        <activity android:name=".activities.MainActivity" />
-        <activity android:name=".activities.ViewDesignerDetailActivity" />
-        <activity android:name=".activities.WorkerMainActivity" />
-        <activity android:name=".activities.AdminMainActivity" />
-        <activity android:name=".activities.MakeReservationActivity"></activity>
+        <activity android:name=".activities.SelectLoginModeActivity" />
+        <activity android:name=".activities.user_activity.MainActivity" />
+        <activity android:name=".activities.user_activity.ViewDesignerDetailActivity" />
+        <activity android:name=".activities.worker_activity.WorkerMainActivity" />
+        <activity android:name=".activities.admin_activity.AdminMainActivity" />
+        <activity android:name=".activities.user_activity.MakeReservationActivity" />
+        <activity android:name=".activities.user_activity.DesignerFilterActivity" />
+        <activity android:name=".activities.RequestPracticeActivity" />
+        <activity android:name=".activities.user_activity.MakeReviewActivity"></activity>
     </application>
-
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
 </manifest>

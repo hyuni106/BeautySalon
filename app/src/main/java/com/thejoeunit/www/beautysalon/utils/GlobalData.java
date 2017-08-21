@@ -5,17 +5,21 @@ import com.thejoeunit.www.beautysalon.datas.Designer;
 import com.thejoeunit.www.beautysalon.datas.User;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
 
 /**
  * Created by the on 2017-07-27.
  */
 
-public class GeneralUtil {
+public class GlobalData {
     // 앱에서 공통적으로 사용되는 데이터를 임시 저장하는 클래스
     // 대부분의 변수/메소드는 static으로
-    // GeneralUtil.메소드(), GeneralUtil.변수
+    // GlobalData.메소드(), GlobalData.변수
 
-    public static ArrayList<DesignCase> globalDesignCase = new ArrayList<DesignCase>();
-    public static ArrayList<Designer> designers = new ArrayList<Designer>();
-    public static ArrayList<User> users = new ArrayList<User>();
+    public static List<DesignCase> globalDesignCase = new ArrayList<>();
+    public static List<Designer> designers = new ArrayList<>();
+    public static List<User> users = new ArrayList<>();
+
+    public static User loginUser = new User();
 }

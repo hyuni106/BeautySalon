@@ -14,6 +14,8 @@ import com.thejoeunit.www.beautysalon.R;
 import com.thejoeunit.www.beautysalon.datas.Designer;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
 
 /**
  * Created by the on 2017-07-28.
@@ -21,12 +23,12 @@ import java.util.ArrayList;
 
 public class DesignerAdapter extends ArrayAdapter<Designer> {
     private Context mContext;
-    private ArrayList<Designer> mList;
+    private List<Designer> mList;
     LayoutInflater inf;
     // LayoutInflater : 화면에 그림을 그려주는 역할을 담당 > 인플레이팅
     // layout 폴더에 있는 xml을 분석해서 화면에 뿌려줌
 
-    public DesignerAdapter(Context context, ArrayList<Designer> list) {
+    public DesignerAdapter(Context context, List<Designer> list) {
 
         super(context, R.layout.designer_list_item, list);
         // 커스텀으로 직접 리스트뷰의 모양 구현
@@ -53,11 +55,16 @@ public class DesignerAdapter extends ArrayAdapter<Designer> {
 
         Designer mDesigner = mList.get(position);
 
+        ImageView designerProfileImg = (ImageView) row.findViewById(R.id.designerProfileImg);
         TextView designerNameTxt = (TextView)row.findViewById(R.id.designerNameTxt);
         TextView majorTxt = (TextView)row.findViewById(R.id.majorTxt);
         TextView genderTxt = (TextView)row.findViewById(R.id.genderTxt);
-        designerNameTxt.setText(mDesigner.getNickName() + " (" + mDesigner.getName() + ")");
-        majorTxt.setText(mDesigner.getMajorAge()+"대 주력");
+
+        String nameAndNickStr = String.format(Locale.KOREA, "%s (%s)", mDesigner.getName(), mDesigner.getNickName());
+        designerNameTxt.setText(nameAndNickStr);
+
+        String majorStr = String.format(Locale.KOREA, "%d대 주력", mDesigner.getMajorAge());
+        majorTxt.setText(majorStr);
 
         if(mDesigner.getGender() == 1) {
             genderTxt.setText(R.string.female);
@@ -71,25 +78,26 @@ public class DesignerAdapter extends ArrayAdapter<Designer> {
         ImageView star4 = (ImageView)row.findViewById(R.id.star4);
         ImageView star5 = (ImageView)row.findViewById(R.id.star5);
 
-        ArrayList<ImageView> stars = new ArrayList<ImageView>();
+        List<ImageView> stars = new ArrayList<>();
         stars.add(star1);
         stars.add(star2);
         stars.add(star3);
         stars.add(star4);
         stars.add(star5);
 
+        // 별은 기본적으로 숨김 처리
         for(ImageView iv : stars) {
             // 배열 내부 객체 조회할 때
             iv.setVisibility(View.INVISIBLE);
         }
 
+        // 평점을 int 형태로 구함
         int rating = (int)mDesigner.getAvgRating();
 
+        // 평점에 맞는 개수만큼 별표를 다시 보여줌
         for(int i=0; i<rating; i++) {
             stars.get(i).setVisibility(View.VISIBLE);
         }
-
-
 
         return row;
     }

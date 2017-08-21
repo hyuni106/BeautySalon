@@ -1,23 +1,28 @@
-package com.thejoeunit.www.beautysalon.activities;
+package com.thejoeunit.www.beautysalon.activities.user_activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.thejoeunit.www.beautysalon.R;
-import com.thejoeunit.www.beautysalon.adapters.PortfolioAdapter;
+import com.thejoeunit.www.beautysalon.activities.BaseActivity;
+import com.thejoeunit.www.beautysalon.adapters.DesignCaseAdapter;
+import com.thejoeunit.www.beautysalon.datas.DesignCase;
 import com.thejoeunit.www.beautysalon.datas.Designer;
+import com.thejoeunit.www.beautysalon.utils.GlobalData;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
+import java.util.Locale;
 
 public class ViewDesignerDetailActivity extends BaseActivity {
 
-    private Designer mDesigner;
     private android.widget.TextView nameTxt;
     private android.widget.TextView genderTxt;
     private android.widget.TextView nickNameTxt;
@@ -28,17 +33,21 @@ public class ViewDesignerDetailActivity extends BaseActivity {
     private android.widget.ImageView star3;
     private android.widget.ImageView star4;
     private android.widget.ImageView star5;
-    ArrayList<ImageView> stars = new ArrayList<ImageView>();
-    private android.widget.Button scheCheckBtn;
-    private android.widget.Button reservationBtn;
     private android.widget.ListView portfolioListView;
-    PortfolioAdapter portfolioAdapter;
+    private android.widget.Button makeReviewBtn;
+    private android.widget.Button reservationBtn;
+    List<ImageView> stars = new ArrayList<>();
+    DesignCaseAdapter designCaseAdapter;
+
+    Designer mDesigner = null;
+
+    int MAKE_REVIEWS = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_designer_detail);
-
+        mDesigner = (Designer) getIntent().getSerializableExtra("designer");
         bindViews();
         setUpEvents();
         setValues();
@@ -47,53 +56,61 @@ public class ViewDesignerDetailActivity extends BaseActivity {
     @Override
     public void setUpEvents() {
         super.setUpEvents();
-        scheCheckBtn.setOnClickListener(new View.OnClickListener() {
+        makeReviewBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(mContext, R.string.preparing_message, Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(mContext, MakeReviewActivity.class);
+                startActivityForResult(intent, MAKE_REVIEWS);
             }
         });
+    }
 
-        reservationBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(mContext, MakeReservationActivity.class);
-                intent.putExtra("designer", mDesigner);
-                startActivity(intent);
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == MAKE_REVIEWS) {
+            if (resultCode == RESULT_OK) {
+                String review = data.getStringExtra("review");
+                DesignCase newReviewCase = new DesignCase(R.drawable.salon_logo, Calendar.getInstance(), 3,
+                        mDesigner, GlobalData.loginUser, 30000, review);
+                mDesigner.getPortfolio().add(newReviewCase);
+                designCaseAdapter.notifyDataSetChanged();
+
+                portfolioListView.smoothScrollToPosition(mDesigner.getPortfolio().size()-1);
             }
-        });
+        }
     }
 
     @Override
     public void setValues() {
         super.setValues();
-        portfolioAdapter = new PortfolioAdapter(mContext, mDesigner.getPortfolio());
-        portfolioListView.setAdapter(portfolioAdapter);
         nameTxt.setText(mDesigner.getName());
-        if(mDesigner.getGender() == 1) {
+        nickNameTxt.setText(mDesigner.getNickName());
+        String major = String.format(Locale.KOREA, "%d대 주력", mDesigner.getMajorAge());
+        majorTxt.setText(major);
+        if (mDesigner.getGender() == 1) {
             genderTxt.setText(R.string.female);
         } else {
             genderTxt.setText(R.string.male);
         }
-        // setText에 String 이외의 객체를 넣으면 코드 작성시엔 에러 X
-        // but 실행 시 Error 발생
-        // String 이외의 객체 넣을 때 => 객체 + ""
-        nickNameTxt.setText(mDesigner.getNickName());
-        majorTxt.setText(mDesigner.getMajorAge()+"대");
-        avgRatingTxt.setText(mDesigner.getAvgRating()+"");
 
-        int index = (int) mDesigner.getAvgRating();
-        for(int i=0; i<index; i++) {
+        for (ImageView iv : stars) {
+            iv.setVisibility(View.GONE);
+        }
+
+        int rate = (int) mDesigner.getAvgRating();
+        for (int i=0; i<rate; i++) {
             stars.get(i).setVisibility(View.VISIBLE);
         }
 
+        designCaseAdapter = new DesignCaseAdapter(mContext, mDesigner.getPortfolio());
+        portfolioListView.setAdapter(designCaseAdapter);
     }
 
     @Override
     public void bindViews() {
-        super.bindViews();
         this.reservationBtn = (Button) findViewById(R.id.reservationBtn);
-        this.scheCheckBtn = (Button) findViewById(R.id.scheCheckBtn);
+        this.makeReviewBtn = (Button) findViewById(R.id.makeReviewBtn);
         this.portfolioListView = (ListView) findViewById(R.id.portfolioListView);
         this.star5 = (ImageView) findViewById(R.id.star5);
         this.star4 = (ImageView) findViewById(R.id.star4);
@@ -105,11 +122,11 @@ public class ViewDesignerDetailActivity extends BaseActivity {
         this.nickNameTxt = (TextView) findViewById(R.id.nickNameTxt);
         this.genderTxt = (TextView) findViewById(R.id.genderTxt);
         this.nameTxt = (TextView) findViewById(R.id.nameTxt);
-        mDesigner = (Designer) getIntent().getSerializableExtra("info");
         stars.add(star1);
         stars.add(star2);
         stars.add(star3);
         stars.add(star4);
         stars.add(star5);
+
     }
 }

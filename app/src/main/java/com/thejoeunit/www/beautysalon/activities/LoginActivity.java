@@ -4,74 +4,82 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import com.thejoeunit.www.beautysalon.R;
+import com.thejoeunit.www.beautysalon.activities.user_activity.MainActivity;
+import com.thejoeunit.www.beautysalon.activities.worker_activity.WorkerMainActivity;
+import com.thejoeunit.www.beautysalon.datas.Designer;
+import com.thejoeunit.www.beautysalon.utils.ContextUtil;
+import com.thejoeunit.www.beautysalon.utils.GlobalData;
+
+import java.util.ArrayList;
+import java.util.Calendar;
 
 public class LoginActivity extends BaseActivity {
-    boolean isWorkerMode = false;
-    private android.widget.TextView workerTxt;
-    private android.widget.Button loginBtn;
+    boolean isWorkerMode = false;   // 직원모드를 판별해주는 변수
+    private TextView workerTxt;
     private EditText idEdtTxt;
+    private Button loginBtn;
+    private android.widget.CheckBox autoCheckBox;
+    private EditText pwEdtTxt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
+        isWorkerMode = getIntent().getBooleanExtra("mode", false);
         bindViews();
-
-        isWorkerMode = getIntent().getBooleanExtra("wokerMode", false);
-
         setUpEvents();
         setValues();
+    }
 
+    @Override
+    public void setValues() {
+        if (isWorkerMode) {
+            workerTxt.setVisibility(View.VISIBLE);
+        } else {
+            workerTxt.setVisibility(View.GONE);
+        }
+
+        if (ContextUtil.getUserData(mContext, "LOGIN_USER", false)) {
+            autoCheckBox.setChecked(true);
+            idEdtTxt.setText(ContextUtil.getUserData(mContext, "LOGIN_USER_ID", ""));
+            pwEdtTxt.setText(ContextUtil.getUserData(mContext, "LOGIN_USER_PW", ""));
+        } else {
+            ContextUtil.logoutProcess(mContext);
+        }
     }
 
     @Override
     public void setUpEvents() {
-        super.setUpEvents();
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (autoCheckBox.isChecked()) {
+                    ContextUtil.setLoginUser(mContext, idEdtTxt.getText().toString(), pwEdtTxt.getText().toString());
+                }
                 Intent intent;
-                String inputId = idEdtTxt.getText().toString();
                 if (isWorkerMode) {
-                    if(inputId.equals("admin")) {
-                        intent = new Intent(mContext, AdminMainActivity.class);
-                    } else {
-                        intent = new Intent(mContext, WorkerMainActivity.class);
-                    }
+                    intent = new Intent(mContext, WorkerMainActivity.class);
                 } else {
                     intent = new Intent(mContext, MainActivity.class);
                 }
+                GlobalData.loginUser.setName(idEdtTxt.getText().toString());
+                GlobalData.loginUser.setGender(1);
                 startActivity(intent);
-                finish();
-                SelectLoginMode.activity.finish();
-                // 로그인 모드 선택화면 종료
             }
         });
     }
 
     @Override
-    public void setValues() {
-        super.setValues();
-        if(isWorkerMode) {
-            // 직원 로그인 버튼을 눌러서 들어왔다면
-            workerTxt.setVisibility(View.VISIBLE);
-            // 직원모드 txt 표시
-        } else {
-            // 회원 로그인 버튼일때
-            workerTxt.setVisibility(View.GONE);
-        }
-    }
-
-    @Override
     public void bindViews() {
-        super.bindViews();
         this.loginBtn = (Button) findViewById(R.id.loginBtn);
+        this.autoCheckBox = (CheckBox) findViewById(R.id.autoCheckBox);
+        this.pwEdtTxt = (EditText) findViewById(R.id.pwEdtTxt);
+        this.idEdtTxt = (EditText) findViewById(R.id.idEdtTxt);
         this.workerTxt = (TextView) findViewById(R.id.workerTxt);
-        idEdtTxt = (EditText)findViewById(R.id.idEdtTxt);
     }
 }

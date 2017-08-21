@@ -1,9 +1,10 @@
-package com.thejoeunit.www.beautysalon.activities;
+package com.thejoeunit.www.beautysalon.activities.admin_activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.thejoeunit.www.beautysalon.R;
+import com.thejoeunit.www.beautysalon.activities.BaseActivity;
 
 public class AdminMainActivity extends BaseActivity {
 

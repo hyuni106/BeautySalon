@@ -1,4 +1,4 @@
-package com.thejoeunit.www.beautysalon.activities;
+package com.thejoeunit.www.beautysalon.activities.user_activity;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
@@ -15,11 +15,12 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.thejoeunit.www.beautysalon.R;
+import com.thejoeunit.www.beautysalon.activities.BaseActivity;
 import com.thejoeunit.www.beautysalon.datas.DesignCase;
 import com.thejoeunit.www.beautysalon.datas.Designer;
 import com.thejoeunit.www.beautysalon.datas.User;
 import com.thejoeunit.www.beautysalon.utils.DateTimeUtil;
-import com.thejoeunit.www.beautysalon.utils.GeneralUtil;
+import com.thejoeunit.www.beautysalon.utils.GlobalData;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -116,8 +117,8 @@ public class MakeReservationActivity extends BaseActivity {
         confirmBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                GeneralUtil.globalDesignCase.add(new DesignCase(-1, mReservDate, -1, mDesigner, new User(), -1, null));
-                Log.d("미용사례개수", GeneralUtil.globalDesignCase.size()+"개");
+                GlobalData.globalDesignCase.add(new DesignCase(-1, mReservDate, -1, mDesigner, new User(), -1, null));
+                Log.d("미용사례개수", GlobalData.globalDesignCase.size()+"개");
                 Toast.makeText(mContext, R.string.reservation_message, Toast.LENGTH_SHORT).show();
                 finish();
             }

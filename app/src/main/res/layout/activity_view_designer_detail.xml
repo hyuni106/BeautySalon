@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/white"
-    tools:context="com.thejoeunit.www.beautysalon.activities.ViewDesignerDetailActivity">
+    tools:context="com.thejoeunit.www.beautysalon.activities.user_activity.ViewDesignerDetailActivity">
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -154,7 +154,7 @@
         android:layout_margin="10dp">
 
         <Button
-            android:id="@+id/scheCheckBtn"
+            android:id="@+id/makeReviewBtn"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"

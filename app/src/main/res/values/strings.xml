@@ -20,7 +20,7 @@
     <string name="avgrating">평점</string>
     <string name="female">여자</string>
     <string name="male">남자</string>
-    <string name="schecheck">일정 확인</string>
+    <string name="schecheck">리뷰남기기</string>
     <string name="reservation">예약하러가기</string>
 
     <!--MakeReservationActivity-->

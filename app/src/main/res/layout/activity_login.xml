@@ -55,6 +55,7 @@
             android:text="@string/pw" />
 
         <EditText
+            android:id="@+id/pwEdtTxt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/pw_hint"
@@ -66,6 +67,7 @@
             android:layout_marginTop="10dp">
 
             <CheckBox
+                android:id="@+id/autoCheckBox"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/auto_login" />
