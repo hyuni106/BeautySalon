@@ -71,7 +71,8 @@ public class ViewDesignerDetailActivity extends BaseActivity {
         if (requestCode == MAKE_REVIEWS) {
             if (resultCode == RESULT_OK) {
                 String review = data.getStringExtra("review");
-                DesignCase newReviewCase = new DesignCase(R.drawable.salon_logo, Calendar.getInstance(), 3,
+                int rating = data.getIntExtra("rating", 0);
+                DesignCase newReviewCase = new DesignCase(R.drawable.salon_logo, Calendar.getInstance(), rating,
                         mDesigner, GlobalData.loginUser, 30000, review);
                 mDesigner.getPortfolio().add(newReviewCase);
                 designCaseAdapter.notifyDataSetChanged();

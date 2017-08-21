@@ -10,20 +10,77 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="평점선택" />
+
+        <RadioGroup
+            android:id="@+id/ratingRadioGroup"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
+
+            <RadioButton
+                android:tag="1"
+                android:id="@+id/radioBtn01"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1점"/>
+
+            <RadioButton
+                android:tag="2"
+                android:id="@+id/radioBtn02"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2점"/>
+
+            <RadioButton
+                android:tag="3"
+                android:id="@+id/radioBtn03"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="3점"/>
+
+            <RadioButton
+                android:tag="4"
+                android:id="@+id/radioBtn04"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="4점"/>
+
+            <RadioButton
+                android:tag="5"
+                android:id="@+id/radioBtn05"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="5점"/>
+
+        </RadioGroup>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="horizontal">
 
         <EditText
             android:id="@+id/inputReviewEdt"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:hint="리뷰를 남겨주세요"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            android:hint="리뷰를 남겨주세요" />
 
         <Button
             android:id="@+id/reviewBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="리뷰작성"/>
+            android:text="리뷰작성" />
 
     </LinearLayout>
 
