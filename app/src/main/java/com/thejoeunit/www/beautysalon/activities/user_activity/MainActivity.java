@@ -34,6 +34,7 @@ public class MainActivity extends BaseActivity {
     private android.widget.Button reqTestBtn;
 
     List<Designer> mDisplayDesignerList = new ArrayList<>();
+    private Button profileBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -121,11 +122,6 @@ public class MainActivity extends BaseActivity {
                 ratingOk = true;
             }
 
-            // String 기능 응용
-//            if (ds.getNickName().toLowerCase().contains(searchNickName.toLowerCase())) {
-//                nicknameOk = true;
-//            }
-
             if (ds.getNickName().toLowerCase().startsWith(searchNickName.toLowerCase())) {
                 nicknameOk = true;
             }
@@ -137,37 +133,6 @@ public class MainActivity extends BaseActivity {
             }
 
         }
-
-//
-//        if (searchNickName.equals("")) {
-//
-//            for (Designer ds : GlobalData.designers) {
-//                if (manSelect) {
-//                    if (ds.getGender() == 0 && ds.getAvgRating() >= minRating) {
-//                        mDisplayDesignerList.add(ds);
-//                    }
-//                }
-//
-//                if (womanSelect) {
-//                    if (ds.getGender() == 1 && ds.getAvgRating() >= minRating) {
-//                        mDisplayDesignerList.add(ds);
-//                    }
-//                }
-//            }
-//        } else {
-//            for (Designer ds : GlobalData.designers) {
-//                if (ds.getNickName().equalsIgnoreCase(searchNickName)) {
-//                    mDisplayDesignerList.add(ds);
-//                } else {
-//                    String upperCase = searchNickName.toUpperCase();
-//                    String lowerCase = searchNickName.toLowerCase();
-//                    if(ds.getNickName().contains(upperCase) || ds.getNickName().contains(lowerCase))
-//                    {
-//                        mDisplayDesignerList.add(ds);
-//                    }
-//                }
-//            }
-//        }
 
         mAdapter.notifyDataSetChanged();
     }
@@ -202,12 +167,21 @@ public class MainActivity extends BaseActivity {
                 startActivity(intent);
             }
         });
+
+        profileBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mContext, MyProfileActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
     public void bindViews() {
         this.designerListView = (ListView) findViewById(R.id.designerListView);
         this.filterBtnImg = (ImageView) findViewById(R.id.filterBtnImg);
+        this.profileBtn = (Button) findViewById(R.id.profileBtn);
         this.reqTestBtn = (Button) findViewById(R.id.reqTestBtn);
     }
 }

@@ -4,87 +4,118 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:gravity="center"
     android:background="@color/white"
+    android:gravity="center"
+    android:orientation="vertical"
     tools:context="com.thejoeunit.www.beautysalon.activities.LoginActivity">
 
-    <FrameLayout
-        android:layout_width="200dp"
-        android:layout_height="200dp">
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:src="@drawable/salon_logo"/>
-
-        <TextView
-            android:id="@+id/workerTxt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/woker_mode"
-            android:background="@color/red"
-            android:padding="5dp"
-            android:layout_gravity="right|top"
-            android:textColor="@color/white"/>
-
-    </FrameLayout>
-
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:orientation="vertical">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/id" />
-
-        <EditText
-            android:id="@+id/idEdtTxt"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/id_hint"
-            android:singleLine="true" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:text="@string/pw" />
-
-        <EditText
-            android:id="@+id/pwEdtTxt"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/pw_hint"
-            android:inputType="textPassword" />
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp">
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical">
 
-            <CheckBox
-                android:id="@+id/autoCheckBox"
+            <FrameLayout
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:layout_marginTop="80dp">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/salon_logo" />
+
+                <TextView
+                    android:id="@+id/workerTxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right|top"
+                    android:background="@color/red"
+                    android:padding="5dp"
+                    android:text="@string/woker_mode"
+                    android:textColor="@color/white" />
+
+            </FrameLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/id" />
+
+                <EditText
+                    android:id="@+id/idEdtTxt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/id_hint"
+                    android:singleLine="true" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="@string/pw" />
+
+                <EditText
+                    android:id="@+id/pwEdtTxt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/pw_hint"
+                    android:inputType="textPassword" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp">
+
+                    <CheckBox
+                        android:id="@+id/autoCheckBox"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/auto_login" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1" />
+
+                    <Button
+                        android:id="@+id/loginBtn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/login" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <com.facebook.login.widget.LoginButton
+                android:id="@+id/fbLoginBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/auto_login" />
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="30dp" />
 
-            <TextView
-                android:layout_width="0dp"
+            <com.kakao.usermgmt.LoginButton
+                android:id="@+id/com_kakao_login"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1" />
-
-            <Button
-                android:id="@+id/loginBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/login" />
+                android:layout_marginBottom="30dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"/>
 
         </LinearLayout>
 
-    </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>

@@ -1,8 +1,13 @@
 package com.thejoeunit.www.beautysalon.activities;
 
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.Signature;
 import android.os.Handler;
 import android.os.Bundle;
+import android.util.Base64;
+import android.util.Log;
 
 import com.thejoeunit.www.beautysalon.R;
 import com.thejoeunit.www.beautysalon.datas.DesignCase;
@@ -10,6 +15,8 @@ import com.thejoeunit.www.beautysalon.datas.Designer;
 import com.thejoeunit.www.beautysalon.datas.User;
 import com.thejoeunit.www.beautysalon.utils.GlobalData;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -23,6 +30,21 @@ public class SplashActivity extends BaseActivity {
         addDesigners();
         addUser();
         addDesignCase();
+
+        try {
+            PackageInfo info = getPackageManager().getPackageInfo(
+                    "com.thejoeunit.www.beautysalon",
+                    PackageManager.GET_SIGNATURES);
+            for (Signature signature : info.signatures) {
+                MessageDigest md = MessageDigest.getInstance("SHA");
+                md.update(signature.toByteArray());
+                Log.d("KeyHash:", Base64.encodeToString(md.digest(), Base64.DEFAULT));
+            }
+        } catch (PackageManager.NameNotFoundException e) {
+
+        } catch (NoSuchAlgorithmException e) {
+
+        }
 
         // postDelayed => 어떤 할 일을 재료1) 몇초 후에(millisecond) 재료2) 할일 => new Runnable()
         // 재료1만큼 시간이 지나면 재료2 실행

@@ -48,4 +48,8 @@
     <!--Common-->
     <string name="preparing_message">준비중입니다.</string>
     <string name="reservation_message">예약이 완료되었습니다.</string>
+
+    <string name="facebook_app_id">291467357926747</string>
+    <string name="fb_login_protocol_scheme">fb291467357926747</string>
+
 </resources>
